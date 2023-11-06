@@ -1,1 +1,1 @@
-# pizza_website
+# Website for online pizza ordering
