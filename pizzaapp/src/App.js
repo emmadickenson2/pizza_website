@@ -1,7 +1,9 @@
+import {CiPizza} from "react-icons/ci";
+
 function App() {
   return (
     <div className="App">
-      <h1>Your Orders</h1>
+      <h1><CiPizza/>Your Orders</h1>
     </div>
   );
 }
