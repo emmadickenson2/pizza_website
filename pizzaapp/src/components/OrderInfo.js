@@ -1,4 +1,5 @@
 import {BiTrash} from "react-icons/bi";
+
 const OrderInfo = ({order}) => {
     return (
         <li className="px-3 py-3 flex items-start">
