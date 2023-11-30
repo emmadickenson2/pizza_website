@@ -31,7 +31,12 @@ function App() {
         {orderList
           .map(order => (
             <OrderInfo key={order.id}
-            order={order}/>
+            order={order}
+            onDeleteOrder={
+              orderId => 
+                setOrderList(orderList.filter(order => order.id !== orderId))
+            }
+            />
           ))
         }
       </ul>
