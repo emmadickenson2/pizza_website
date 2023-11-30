@@ -1,10 +1,25 @@
+import { useState, useEffect, useCallback } from 'react'
 import {CiPizza} from "react-icons/ci";
 import Search from "./components/Search"
 import AddOrder from "./components/AddOrder"
 import OrderInfo from "./components/OrderInfo";
-import orderList from "./data.json"
 
 function App() {
+
+  let [orderList, setOrderList] = useState([]);
+
+  const fetchData = useCallback(() => {
+    fetch('./data.json')
+    .then(response => response.json())
+    .then(data => {
+      setOrderList(data)
+    });
+  }, []) 
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
   return (
     <div className="App container mx-auto mt-3 font-thin">
       <h1 className="text-5xl mb-3">
