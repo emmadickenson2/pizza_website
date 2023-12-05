@@ -7,6 +7,17 @@ import OrderInfo from "./components/OrderInfo";
 function App() {
 
   let [orderList, setOrderList] = useState([]);
+  let [query, setQuery] = useState("")
+
+  const filteredOrders = orderList.filter(
+    item => {
+      return (
+        item.name.toLowerCase().includes(query.toLowerCase()) ||
+        item.order.toLowerCase().includes(query.toLowerCase()) ||
+        item.orderNotes.toLowerCase().includes(query.toLowerCase())
+      )
+    }
+  )
 
   const fetchData = useCallback(() => {
     fetch('./data.json')
@@ -25,16 +36,18 @@ function App() {
       <h1 className="text-5xl mb-3">
         <CiPizza className="inline-block text-red-600 align-top"/>Your Orders</h1>
         <AddOrder />
-      <Search />
+      <Search query={query}
+      onQueryChange={myQuery => setQuery(myQuery)}/>
 
       <ul className="divie-y divide-gray-200">
-        {orderList
+        {filteredOrders
           .map(order => (
             <OrderInfo key={order.id}
             order={order}
             onDeleteOrder={
               orderId => 
-                setOrderList(orderList.filter(order => order.id !== orderId))
+                setOrderList(orderList.filter(order => 
+                  order.id !== orderId))
             }
             />
           ))
