@@ -7,7 +7,9 @@ import OrderInfo from "./components/OrderInfo";
 function App() {
 
   let [orderList, setOrderList] = useState([]);
-  let [query, setQuery] = useState("")
+  let [query, setQuery] = useState("");
+  let [sortBy, setSortBy] = useState("name");
+  let [orderBy, setOrderBy] = useState("asc");
 
   const filteredOrders = orderList.filter(
     item => {
@@ -17,7 +19,13 @@ function App() {
         item.orderNotes.toLowerCase().includes(query.toLowerCase())
       )
     }
-  )
+  ).sort((a,b) => {
+    let order = (orderBy === 'asc') ? 1 : -1;
+    return (
+      a[sortBy].toLowerCase() < b[sortBy].toLowerCase()
+        ? -1 * order : 1 * order
+    )
+  })
 
   const fetchData = useCallback(() => {
     fetch('./data.json')
