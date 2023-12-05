@@ -45,7 +45,12 @@ function App() {
         <CiPizza className="inline-block text-red-600 align-top"/>Your Orders</h1>
         <AddOrder />
       <Search query={query}
-      onQueryChange={myQuery => setQuery(myQuery)}/>
+      onQueryChange={myQuery => setQuery(myQuery)}
+      orderBy={orderBy}
+      onOrderByChange={mySort => setOrderBy(mySort)}
+      sortBy={sortBy}
+      onSortByChange={mySort => setSortBy(mySort)}
+      />
 
       <ul className="divie-y divide-gray-200">
         {filteredOrders
